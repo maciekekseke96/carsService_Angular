@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import {Car} from '../models/car'
+import { Car } from '../models/car';
 
 @Component({
   selector: 'app-cars-list',
   templateUrl: './cars-list.component.html',
-  styleUrls: ['./cars-list.component.scss']
+  styleUrls: ['./cars-list.component.scss'],
 })
 export class CarsListComponent implements OnInit {
-
-  cars : Car[]= [
+  totalCost: number;
+  cars: Car[] = [
     {
       id: 1,
       model: 'Mazda Rx7',
@@ -17,10 +17,10 @@ export class CarsListComponent implements OnInit {
       deadline: '05-05-2016',
       client: {
         firstName: 'Jan',
-        surname: 'Kowalski'
+        surname: 'Kowalski',
       },
       cost: 300,
-      isFullyDamaged: true
+      isFullyDamaged: true,
     },
     {
       id: 2,
@@ -30,10 +30,10 @@ export class CarsListComponent implements OnInit {
       deadline: '03-06-2016',
       client: {
         firstName: 'Michał',
-        surname: 'Nowak'
+        surname: 'Nowak',
       },
       cost: 1200,
-      isFullyDamaged: false
+      isFullyDamaged: false,
     },
     {
       id: 3,
@@ -43,16 +43,19 @@ export class CarsListComponent implements OnInit {
       deadline: '03-03-2017',
       client: {
         firstName: 'Beata',
-        surname: 'Dampc'
+        surname: 'Dampc',
       },
       cost: 2800,
-      isFullyDamaged: true
-    }
-  ]
-
-  constructor() { }
-
-  ngOnInit(): void {
+      isFullyDamaged: true,
+    },
+  ];
+  countTotalCost(): void {
+    this.totalCost = this.cars.map((car) => car.cost).reduce((prev, next)=> prev+next);
   }
 
+  constructor() {}
+
+  ngOnInit(): void {
+    this.countTotalCost();
+  }
 }
